@@ -98,18 +98,16 @@ static ORSnapshotDiffs *sharedPlugin;
 
 - (void)tappedButton:(NSButton *)button
 {
-    if (self.reader.hasSnapshotTestErrors || self.reader.hasNewSnapshots) {
-        NSPopover *popover = [[NSPopover alloc] init];
-        popover.contentSize = CGSizeMake(575, 480);
-        NSString *class = NSStringFromClass(ORPopoverController.class);
-        NSBundle *bundle = [NSBundle bundleForClass:ORSnapshotDiffs.class];
+    NSPopover *popover = [[NSPopover alloc] init];
+    popover.contentSize = CGSizeMake(575, 480);
+    NSString *class = NSStringFromClass(ORPopoverController.class);
+    NSBundle *bundle = [NSBundle bundleForClass:ORSnapshotDiffs.class];
 
-        ORPopoverController *controller = [[ORPopoverController alloc] initWithNibName:class bundle:bundle reader:self.reader];
-        popover.contentViewController = controller;
-        popover.behavior = NSPopoverBehaviorTransient;
-        
-        [popover showRelativeToRect:button.bounds ofView:button preferredEdge:NSMaxYEdge];
-    }
+    ORPopoverController *controller = [[ORPopoverController alloc] initWithNibName:class bundle:bundle reader:self.reader];
+    popover.contentViewController = controller;
+    popover.behavior = NSPopoverBehaviorTransient;
+
+    [popover showRelativeToRect:button.bounds ofView:button preferredEdge:NSMaxYEdge];
 }
 
 - (id)initWithBundle:(NSBundle *)plugin

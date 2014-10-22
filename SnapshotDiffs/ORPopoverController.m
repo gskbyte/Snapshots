@@ -67,10 +67,12 @@
     
     [self tableViewSelectionDidChange:nil];
 
-    NSInteger selectedRow = [self.testTableView selectedRow];
-    ORTableViewRowView *view = [self.testTableView viewAtColumn:0 row:selectedRow makeIfNecessary:YES];
-    self.currentTableViewSelection = view;
-    [view setSelected:YES];
+    if(self.testTableView.numberOfRows > 0) {
+        NSInteger selectedRow = [self.testTableView selectedRow];
+        ORTableViewRowView *view = [self.testTableView viewAtColumn:0 row:selectedRow makeIfNecessary:YES];
+        self.currentTableViewSelection = view;
+        [view setSelected:YES];
+    }
 }
 
 - (IBAction)openAll:(id)sender
@@ -82,6 +84,10 @@
 
 - (void)tableViewSelectionDidChange:(NSNotification *)notification
 {
+    if(self.testTableView.numberOfRows == 0) {
+        return;
+    }
+
     NSInteger row = [self.testTableView selectedRow];
     id command = [self.tableDataSource objectForRow:row];
 
